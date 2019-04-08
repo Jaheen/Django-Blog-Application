@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<!--The above load static load the static folder in the blog app and its contents-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'blog/StyleSheets/index.css' %}">
+    <!--As stated above from the static the css file is rendered-->
+    <title>Blog Posts</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Django Blog Posts</h1>
+        </div>
+    </header>
+    <div class="card-view">
+        {% if blog_data %}
+        <!--Checking the availability of data objects the below block will execute if there is atleast one database entry-->
+            {% for blog in blog_data %}
+            <!--Same Python for loop-->
+                <div class="card">
+                    <h1 class="title">
+                        {{ blog.blog_title }}
+                        <!--***Variables Should Be enclosed within double pair of curly braces***-->
+                        <!--Sub contents of the iteration variable-->
+                    </h1>
+                    <p class="content">
+                        {{ blog.blog_content }}
+                        <!--***Variables Should Be enclosed within double pair of curly braces***-->
+                        <!--Sub contents of the iteration variable-->
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+        <!--This block Will execute if Database table has zero entries-->
+        <div class="card">
+            <h1 class="title">No Posts Available</h1>
+            <p class="content">Better Luck Next Time</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
